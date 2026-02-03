@@ -1,68 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@1,400;1,700&display=swap');
-
 :root {
-    --cor-fundo: #fdf6f6;
-    --cor-carta: #ffffff;
-    --cor-texto: #333333;
-    --cor-detalhe: #c38e5d;
-    --cor-botao: #e76f51;
+    --bg: #fdf6f6;
+    --card-bg: #ffffff;
+    --text-color: #2c3e50;
+    --accent: #d4a373;
+    --primary: #e76f51;
 }
 
 body {
-    background-color: var(--cor-fundo);
+    background-color: var(--bg);
+    margin: 0;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
-    padding: 10px;
-    font-family: 'Poppins', Arial, sans-serif;
-    box-sizing: border-box;
+    font-family: 'Lora', serif;
     overflow: hidden;
 }
 
 .container {
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     text-align: center;
 }
 
 #open-card { display: none; }
 
+/* Botão de Abrir */
 .btn-open {
-    background-color: var(--cor-botao);
+    background-color: var(--primary);
     color: white;
-    padding: 16px 30px;
+    padding: 18px 35px;
     border-radius: 50px;
     cursor: pointer;
     font-size: 1.1rem;
-    box-shadow: 0 4px 15px rgba(231, 111, 81, 0.3);
-    font-weight: bold;
+    box-shadow: 0 5px 20px rgba(231, 111, 81, 0.4);
     display: inline-block;
+    transition: 0.3s;
 }
 
+/* Estrutura da Carta */
 .card {
-    background: var(--cor-carta);
+    background: var(--card-bg);
     padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.1);
     display: none;
+    flex-direction: column;
     width: 100%;
     max-height: 85vh;
     box-sizing: border-box;
-    flex-direction: column;
-    animation: aparecer 0.6s ease-out;
-    border: 1px solid #f9ecec;
+    border: 1px solid #f0e4e4;
+    animation: slideUp 0.5s ease;
 }
 
 #open-card:checked ~ .card { display: flex; }
 #open-card:checked ~ .btn-open { display: none; }
 
-.header-text {
-    font-family: 'Dancing Script', cursive !important;
-    font-size: 1.5rem !important;
-    color: var(--cor-detalhe);
-    margin-bottom: 10px;
+/* Fontes e Textos */
+.from-text {
+    font-family: 'Great Vibes', cursive !important;
+    color: var(--accent);
+    font-size: 1.8rem;
+    margin: 0 0 15px 0;
+    font-weight: normal;
+}
+
+.greeting {
+    font-family: 'Great Vibes', cursive !important;
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin: 5px 0 15px 0;
+    text-align: center;
 }
 
 .content-scroll {
@@ -71,70 +80,63 @@ body {
     text-align: left;
 }
 
-/* Scrollbar discreto para mobile */
-.content-scroll::-webkit-scrollbar { width: 3px; }
-.content-scroll::-webkit-scrollbar-thumb { background: #eee; }
-
-h1 {
-    font-family: 'Dancing Script', cursive !important;
-    color: var(--cor-texto);
-    font-size: 1.8rem;
-    margin: 10px 0;
-    text-align: center;
-}
+/* Scroll discreto */
+.content-scroll::-webkit-scrollbar { width: 4px; }
+.content-scroll::-webkit-scrollbar-thumb { background: #eee; border-radius: 10px; }
 
 p {
-    font-family: 'Playfair Display', serif !important;
-    font-style: italic !important;
-    font-size: 1.05rem;
-    color: var(--cor-texto);
-    line-height: 1.6;
-    margin-bottom: 12px;
+    font-family: 'Lora', serif !important;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    margin-bottom: 18px;
 }
 
 .signature {
-    font-family: 'Dancing Script', cursive !important;
-    font-size: 1.4rem;
-    color: var(--cor-botao);
+    font-family: 'Great Vibes', cursive !important;
+    font-size: 1.7rem;
+    color: var(--primary);
     text-align: center;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .btn-close {
     display: block;
     margin-top: 15px;
-    font-size: 0.7rem;
-    color: #ccc;
+    font-size: 0.8rem;
+    color: #bbb;
     cursor: pointer;
 }
 
-.heart-container { margin-top: 10px; }
+/* Animação Coração */
+.heart-container { margin-top: 15px; }
 .heart {
-    background-color: var(--cor-botao);
+    background-color: var(--primary);
     display: inline-block;
-    height: 12px;
+    height: 15px;
     position: relative;
     transform: rotate(-45deg);
-    width: 12px;
+    width: 15px;
     animation: pulse 1.5s infinite;
 }
 .heart:before, .heart:after {
     content: "";
-    background-color: var(--cor-botao);
+    background-color: var(--primary);
     border-radius: 50%;
-    height: 12px;
+    height: 15px;
     position: absolute;
-    width: 12px;
+    width: 15px;
 }
-.heart:before { top: -6px; left: 0; }
-.heart:after { left: 6px; top: 0; }
+.heart:before { top: -8px; left: 0; }
+.heart:after { left: 8px; top: 0; }
 
 @keyframes pulse {
     0%, 100% { transform: scale(1) rotate(-45deg); }
     50% { transform: scale(1.2) rotate(-45deg); }
 }
 
-@keyframes aparecer {
-    from { opacity: 0; transform: translateY(20px); }
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
