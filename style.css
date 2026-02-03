@@ -13,13 +13,17 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    padding: 20px; /* Garante que a carta não cole nas bordas do celular */
     font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
 }
 
 .container {
-    width: 90%;
-    max-width: 550px;
-    text-align: center;
+    width: 100%;
+    max-width: 500px; /* Limita o tamanho no PC */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
 }
 
@@ -38,79 +42,70 @@ body {
     font-size: 1.1rem;
     box-shadow: 0 5px 20px rgba(231, 111, 81, 0.4);
     transition: all 0.3s ease;
-    display: inline-block;
+    text-align: center;
 }
 
-.btn-open:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(231, 111, 81, 0.5);
-}
-
-/* A Carta (Configuração Inicial) */
+/* A Carta */
 .card {
     background: var(--cor-carta);
-    padding: 40px;
-    border-radius: 5px;
+    padding: 30px; /* Reduzi um pouco para telas menores */
+    border-radius: 12px; /* Bordas mais suaves */
     box-shadow: 0 15px 50px rgba(0,0,0,0.08);
     border: 1px solid #f2e9e9;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.7);
+    
+    /* Ajuste para Mobile: removido o position absolute problemático */
+    display: none; 
     width: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-    z-index: 5;
     box-sizing: border-box;
+    animation: aparecer 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1);
 }
 
-/* Mostrar a carta quando o checkbox for marcado */
+/* Lógica de exibição */
 #open-card:checked ~ .card {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
+    display: block;
 }
 
 #open-card:checked ~ .btn-open {
     display: none;
 }
 
-/* Conteúdo */
+/* Texto da Carta */
 .header-text h1 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: var(--cor-detalhe);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-weight: normal;
 }
 
 p {
     font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
+    font-size: 1.05rem; /* Ajustado para melhor leitura no celular */
     color: var(--cor-texto);
-    line-height: 1.8;
+    line-height: 1.6;
     text-align: left;
     margin-bottom: 15px;
+    word-wrap: break-word; /* Evita que o texto quebre o layout */
 }
 
 .signature {
-    margin-top: 30px;
-    font-size: 1.2rem;
+    margin-top: 25px;
+    font-size: 1.1rem;
     color: var(--cor-botao);
     font-weight: bold;
+    line-height: 1.4;
 }
 
 .btn-close {
     display: block;
-    margin-top: 25px;
+    margin-top: 20px;
     font-size: 0.8rem;
     color: #bbb;
     cursor: pointer;
     text-decoration: underline;
 }
 
-/* Coração Animado */
-.heart-container { margin-top: 25px; }
+/* Coração */
+.heart-container { margin-top: 20px; }
 .heart {
     background-color: var(--cor-botao);
     display: inline-block;
@@ -132,6 +127,18 @@ p {
 .heart:after { left: 8px; top: 0; }
 
 @keyframes heartbeat {
-    0% { transform: scale(1) rotate(-45deg); }
+    0%, 100% { transform: scale(1) rotate(-45deg); }
     50% { transform: scale(1.2) rotate(-45deg); }
-    100% { transform: scale(1) rotate(-45deg
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(20px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Ajustes finos para telas muito pequenas (iPhone SE, etc) */
+@media (max-width: 380px) {
+    .card { padding: 20px; }
+    p { font-size: 1rem; }
+    .header-text h1 { font-size: 1.1rem; }
+}
