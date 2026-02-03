@@ -1,3 +1,6 @@
+/* Importação forçada para garantir o funcionamento no mobile */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@1,400;1,700&display=swap');
+
 :root {
     --cor-fundo: #fdf6f6;
     --cor-carta: #ffffff;
@@ -13,54 +16,52 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    padding: 20px; /* Garante que a carta não cole nas bordas do celular */
+    padding: 15px; 
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .container {
     width: 100%;
-    max-width: 500px; /* Limita o tamanho no PC */
+    max-width: 450px; 
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
 }
 
-/* Checkbox Invisível */
-#open-card {
-    display: none;
-}
+#open-card { display: none; }
 
 /* Botão Abrir */
 .btn-open {
     background-color: var(--cor-botao);
     color: white;
-    padding: 18px 35px;
+    padding: 16px 32px;
     border-radius: 50px;
     cursor: pointer;
     font-size: 1.1rem;
-    box-shadow: 0 5px 20px rgba(231, 111, 81, 0.4);
-    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(231, 111, 81, 0.3);
+    transition: 0.3s;
     text-align: center;
+    font-weight: bold;
 }
 
 /* A Carta */
 .card {
     background: var(--cor-carta);
-    padding: 30px; /* Reduzi um pouco para telas menores */
-    border-radius: 12px; /* Bordas mais suaves */
-    box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
     border: 1px solid #f2e9e9;
-    
-    /* Ajuste para Mobile: removido o position absolute problemático */
     display: none; 
     width: 100%;
+    max-height: 85vh; /* Evita que a carta saia da tela do celular */
     box-sizing: border-box;
-    animation: aparecer 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    overflow-y: auto; /* Permite rolar o texto se for muito grande */
+    animation: aparecer 0.6s ease-out;
 }
 
-/* Lógica de exibição */
 #open-card:checked ~ .card {
     display: block;
 }
@@ -69,43 +70,35 @@ body {
     display: none;
 }
 
-/* Texto da Carta */
-.header-text h1 {
-    font-size: 1.3rem;
+/* --- ESTILIZAÇÃO DAS FONTES --- */
+
+.header-text {
+    font-family: 'Dancing Script', cursive !important;
     color: var(--cor-detalhe);
-    margin-bottom: 20px;
-    font-weight: normal;
-    /* Para os títulos e assinaturas (Estilo Manuscrito) */
-h1, .signature, .header-text {
-    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
-/* Para o corpo da carta (Estilo Clássico/Elegante) */
 p {
-    font-family: 'Playfair Display', serif;
-    font-style: italic; /* O itálico nesta fonte fica idêntico a cartas de época */
+    font-family: 'Playfair Display', serif !important;
+    font-style: italic !important;
     font-size: 1.1rem;
-    line-height: 1.7;
-}
-}
-
-p {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem; /* Ajustado para melhor leitura no celular */
     color: var(--cor-texto);
     line-height: 1.6;
-    text-align: left;
     margin-bottom: 15px;
-    word-wrap: break-word; /* Evita que o texto quebre o layout */
+    text-align: left;
 }
 
 .signature {
+    font-family: 'Dancing Script', cursive !important;
     margin-top: 25px;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     color: var(--cor-botao);
-    font-weight: bold;
-    line-height: 1.4;
+    text-align: center;
 }
+
+/* --- ELEMENTOS EXTRAS --- */
 
 .btn-close {
     display: block;
@@ -113,11 +106,11 @@ p {
     font-size: 0.8rem;
     color: #bbb;
     cursor: pointer;
+    text-align: center;
     text-decoration: underline;
 }
 
-/* Coração */
-.heart-container { margin-top: 20px; }
+.heart-container { text-align: center; margin-top: 15px; }
 .heart {
     background-color: var(--cor-botao);
     display: inline-block;
@@ -125,7 +118,7 @@ p {
     position: relative;
     transform: rotate(-45deg);
     width: 15px;
-    animation: heartbeat 1.5s infinite;
+    animation: pulse 1.5s infinite;
 }
 .heart:before, .heart:after {
     content: "";
@@ -138,20 +131,18 @@ p {
 .heart:before { top: -8px; left: 0; }
 .heart:after { left: 8px; top: 0; }
 
-@keyframes heartbeat {
+@keyframes pulse {
     0%, 100% { transform: scale(1) rotate(-45deg); }
     50% { transform: scale(1.2) rotate(-45deg); }
 }
 
 @keyframes aparecer {
-    from { opacity: 0; transform: translateY(20px) scale(0.9); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Ajustes finos para telas muito pequenas (iPhone SE, etc) */
+/* Ajuste para telas bem pequenas */
 @media (max-width: 380px) {
-    .card { padding: 20px; }
+    .card { padding: 15px; }
     p { font-size: 1rem; }
-    .header-text h1 { font-size: 1.1rem; }
 }
-
