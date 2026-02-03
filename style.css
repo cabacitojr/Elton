@@ -1,0 +1,137 @@
+:root {
+    --cor-fundo: #fdf6f6;
+    --cor-carta: #ffffff;
+    --cor-texto: #2c3e50;
+    --cor-detalhe: #d4a373;
+    --cor-botao: #e76f51;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    width: 90%;
+    max-width: 550px;
+    text-align: center;
+    position: relative;
+}
+
+/* Checkbox Invisível */
+#open-card {
+    display: none;
+}
+
+/* Botão Abrir */
+.btn-open {
+    background-color: var(--cor-botao);
+    color: white;
+    padding: 18px 35px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 20px rgba(231, 111, 81, 0.4);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-open:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(231, 111, 81, 0.5);
+}
+
+/* A Carta (Configuração Inicial) */
+.card {
+    background: var(--cor-carta);
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+    border: 1px solid #f2e9e9;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    z-index: 5;
+    box-sizing: border-box;
+}
+
+/* Mostrar a carta quando o checkbox for marcado */
+#open-card:checked ~ .card {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#open-card:checked ~ .btn-open {
+    display: none;
+}
+
+/* Conteúdo */
+.header-text h1 {
+    font-size: 1.4rem;
+    color: var(--cor-detalhe);
+    margin-bottom: 30px;
+    font-weight: normal;
+}
+
+p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--cor-texto);
+    line-height: 1.8;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.signature {
+    margin-top: 30px;
+    font-size: 1.2rem;
+    color: var(--cor-botao);
+    font-weight: bold;
+}
+
+.btn-close {
+    display: block;
+    margin-top: 25px;
+    font-size: 0.8rem;
+    color: #bbb;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Coração Animado */
+.heart-container { margin-top: 25px; }
+.heart {
+    background-color: var(--cor-botao);
+    display: inline-block;
+    height: 15px;
+    position: relative;
+    transform: rotate(-45deg);
+    width: 15px;
+    animation: heartbeat 1.5s infinite;
+}
+.heart:before, .heart:after {
+    content: "";
+    background-color: var(--cor-botao);
+    border-radius: 50%;
+    height: 15px;
+    position: absolute;
+    width: 15px;
+}
+.heart:before { top: -8px; left: 0; }
+.heart:after { left: 8px; top: 0; }
+
+@keyframes heartbeat {
+    0% { transform: scale(1) rotate(-45deg); }
+    50% { transform: scale(1.2) rotate(-45deg); }
+    100% { transform: scale(1) rotate(-45deg
