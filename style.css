@@ -75,6 +75,18 @@ body {
     color: var(--cor-detalhe);
     margin-bottom: 20px;
     font-weight: normal;
+    /* Para os títulos e assinaturas (Estilo Manuscrito) */
+h1, .signature, .header-text {
+    font-family: 'Dancing Script', cursive;
+}
+
+/* Para o corpo da carta (Estilo Clássico/Elegante) */
+p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; /* O itálico nesta fonte fica idêntico a cartas de época */
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
 }
 
 p {
@@ -142,3 +154,4 @@ p {
     p { font-size: 1rem; }
     .header-text h1 { font-size: 1.1rem; }
 }
+
